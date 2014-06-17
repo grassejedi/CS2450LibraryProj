@@ -6,18 +6,33 @@
 
 package Teamjava.Library;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 /**
  *
  * @author tyler
  */
 public class CheckoutDate
 {
-    public checkoutDate()
+    private Calendar checkoutCalendar;
+    private Date checkoutDate;
+    
+    public CheckoutDate()
     {
-        
+        checkoutCalendar = new GregorianCalendar();
+        checkoutDate = checkoutCalendar.getTime();
     }
     
-    public void getDate()
+    public Date getDate()
     {
+        return checkoutDate;
+    }
+    
+    public void advanceDate(int numDays)
+    {
+        checkoutCalendar.add(Calendar.DAY_OF_MONTH, numDays);
+        checkoutDate = checkoutCalendar.getTime();
     }
 }
