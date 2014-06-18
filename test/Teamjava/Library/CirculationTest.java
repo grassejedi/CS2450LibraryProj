@@ -11,18 +11,16 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import java.util.Date;
 import static org.junit.Assert.*;
-
 
 /**
  *
  * @author tyler
  */
-public class CheckoutDateTest
+public class CirculationTest
 {
     
-    public CheckoutDateTest()
+    public CirculationTest()
     {
     }
     
@@ -46,22 +44,11 @@ public class CheckoutDateTest
     {
     }
 
-    /**
-     * Test of advanceDate method, of class CheckoutDate.
-     */
     @Test
-    public void testAdvanceDate()
+    public void testSomeMethod()
     {
-        System.out.println("advanceDate");
-//        CheckoutDate dateCheckedOut = new CheckoutDate();
-//        int numDays = 3;
-//        CheckoutDate simulatedFutureDate = new CheckoutDate();
-//        simulatedFutureDate.advanceDate(numDays);
-        
-        Calendar 
-        assert();
-        
- 
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
     
 }

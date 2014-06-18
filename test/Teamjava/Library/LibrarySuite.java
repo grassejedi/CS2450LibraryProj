@@ -18,7 +18,7 @@ import org.junit.runners.Suite;
  * @author Sean
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({NewClassTest.class, CheckoutDateTest.class})
+@Suite.SuiteClasses({CheckoutDateTest.class, CirculationTest.class})
 public class LibrarySuite {
 
     @BeforeClass

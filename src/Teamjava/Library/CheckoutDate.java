@@ -27,6 +27,7 @@ public class CheckoutDate
     
     public Date getDate()
     {
+        System.out.println(checkoutDate.getTime());
         return checkoutDate;
     }
     
