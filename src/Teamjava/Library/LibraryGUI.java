@@ -39,7 +39,6 @@ public class LibraryGUI extends javax.swing.JFrame
         libraryInfoPanel = new javax.swing.JPanel();
         OpenLibraryFileBtn = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        dateAdvanceSpinner = new javax.swing.JSpinner();
         jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -47,6 +46,8 @@ public class LibraryGUI extends javax.swing.JFrame
         allBooksTxtArea = new javax.swing.JTextArea();
         jScrollPane6 = new javax.swing.JScrollPane();
         overdueBooksTxtArea = new javax.swing.JTextArea();
+        currentDateLabel = new javax.swing.JLabel();
+        advanceDateBtn = new javax.swing.JButton();
         patronInfoPanel = new javax.swing.JPanel();
         patronNameComboBox = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
@@ -77,8 +78,6 @@ public class LibraryGUI extends javax.swing.JFrame
 
         jLabel6.setText("Select File:");
 
-        dateAdvanceSpinner.setModel(new javax.swing.SpinnerDateModel());
-
         jLabel8.setText("Current Date:");
 
         jLabel1.setText("All Books:");
@@ -92,6 +91,10 @@ public class LibraryGUI extends javax.swing.JFrame
         overdueBooksTxtArea.setColumns(20);
         overdueBooksTxtArea.setRows(5);
         jScrollPane6.setViewportView(overdueBooksTxtArea);
+
+        currentDateLabel.setText("1/1/14");
+
+        advanceDateBtn.setText("Advance Date");
 
         javax.swing.GroupLayout libraryInfoPanelLayout = new javax.swing.GroupLayout(libraryInfoPanel);
         libraryInfoPanel.setLayout(libraryInfoPanelLayout);
@@ -114,7 +117,10 @@ public class LibraryGUI extends javax.swing.JFrame
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(libraryInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(dateAdvanceSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(libraryInfoPanelLayout.createSequentialGroup()
+                                        .addComponent(currentDateLabel)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(advanceDateBtn)))
                                 .addGap(144, 144, 144))
                             .addGroup(libraryInfoPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel1)
@@ -125,20 +131,21 @@ public class LibraryGUI extends javax.swing.JFrame
         libraryInfoPanelLayout.setVerticalGroup(
             libraryInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(libraryInfoPanelLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addGap(15, 15, 15)
                 .addGroup(libraryInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dateAdvanceSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
                     .addComponent(jLabel6)
-                    .addComponent(OpenLibraryFileBtn))
+                    .addComponent(OpenLibraryFileBtn)
+                    .addComponent(currentDateLabel)
+                    .addComponent(advanceDateBtn))
                 .addGap(18, 18, 18)
                 .addGroup(libraryInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(libraryInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(libraryInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                    .addComponent(jScrollPane6))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
@@ -188,18 +195,12 @@ public class LibraryGUI extends javax.swing.JFrame
                     .addGroup(patronInfoPanelLayout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addGroup(patronInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(patronInfoPanelLayout.createSequentialGroup()
-                                .addComponent(checkOutBtn)
-                                .addGap(144, 144, 144))
-                            .addGroup(patronInfoPanelLayout.createSequentialGroup()
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(patronInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(patronInfoPanelLayout.createSequentialGroup()
-                                        .addGap(36, 36, 36)
-                                        .addComponent(checkInBtn))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, patronInfoPanelLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(checkOutBtn))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(patronInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(checkInBtn))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, patronInfoPanelLayout.createSequentialGroup()
                 .addGap(101, 101, 101)
@@ -220,15 +221,14 @@ public class LibraryGUI extends javax.swing.JFrame
                     .addComponent(jLabel3)
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(patronInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(patronInfoPanelLayout.createSequentialGroup()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(checkInBtn)))
+                .addGroup(patronInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(checkOutBtn)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addGroup(patronInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(checkInBtn)
+                    .addComponent(checkOutBtn))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -249,7 +249,7 @@ public class LibraryGUI extends javax.swing.JFrame
                 .addComponent(libraryInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addComponent(patronInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14))
+                .addGap(18, 18, 18))
         );
 
         pack();
@@ -330,11 +330,12 @@ public class LibraryGUI extends javax.swing.JFrame
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton OpenLibraryFileBtn;
+    private javax.swing.JButton advanceDateBtn;
     private javax.swing.JTextArea allBooksTxtArea;
     private javax.swing.JButton checkInBtn;
     private javax.swing.JButton checkOutBtn;
     private javax.swing.JList checkedOutBooksList;
-    private javax.swing.JSpinner dateAdvanceSpinner;
+    private javax.swing.JLabel currentDateLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
