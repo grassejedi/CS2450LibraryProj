@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  */
 public class LibraryGUI extends javax.swing.JFrame
 {
-    private Catalog libaryCatalog;
+    private Circulation circulationDesk;
     /**
      * Creates new form LibraryGUI
      */
@@ -288,7 +288,7 @@ public class LibraryGUI extends javax.swing.JFrame
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(18, Short.MAX_VALUE)
                 .addComponent(libraryInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addComponent(patronInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -313,9 +313,11 @@ public class LibraryGUI extends javax.swing.JFrame
         if (returnVal == JFileChooser.APPROVE_OPTION)
         {
             File file = libraryFileChooser.getSelectedFile();
-            libaryCatalog = new Catalog(file.getAbsolutePath()); 
-            libaryCatalog.populateCatalog();
-            updateAllBooksTxtArea();
+ 
+            
+            //libaryCatalog = new Catalog(file.getAbsolutePath()); 
+            //libaryCatalog.populateCatalog();
+            //updateAllBooksTxtArea();
             //allBooksTxtArea.setText(libaryCatalog.allBooksStatus());
             //overdueBooksTxtArea.setText(libaryCatalog.displayOverDueBooks());
         }
