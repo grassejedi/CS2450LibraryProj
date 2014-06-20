@@ -41,9 +41,9 @@ public class Catalog {
 	}
 	
 	//It will ask for the file name and will set it
-	public void setFileName(){
-		System.out.print("Enter file name: "); 	  //prompt the user
-		fileName = input.nextLine();		  	//store the input from the user
+	public void setFileName(String file){
+
+		fileName = file;		  	//store the input from the user
 		if (fileName.equals("0"))				  //way to exit the program in case no file name known
 			System.exit(0);
 		openFile(fileName);
@@ -58,8 +58,8 @@ public class Catalog {
 			//sends a messages if failure opening the file
 			System.out.println("Error opening file: "+fileName);
 			System.out.println("Check file path, and/or spelling ie: fileName.txt");
-			System.out.println("Try again, or enter 0 as file name to terminate program");
-			setFileName();
+			//System.out.println("Try again, or enter 0 as file name to terminate program");
+			//setFileName();
 		}
 	}
 	
