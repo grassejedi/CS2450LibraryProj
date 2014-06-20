@@ -178,7 +178,9 @@ public class Catalog {
 		}
                 return target;
 	}
-        
+        public List<Book> getAllBooks(){
+            return books;
+        }
         
 	//It will write all book and the session changes to the file
 	public void writeToFile(String fileToWrite) throws FileNotFoundException, UnsupportedEncodingException{
