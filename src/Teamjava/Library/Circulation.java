@@ -15,11 +15,11 @@ import java.util.List;
 public class Circulation 
 {
     private Catalog catalog;
-    //private Patrons patrons;
+    private Patrons patrons;
     
     public void Circulation(){
         catalog = new Catalog();
-        //patrons = new Patrons("patrons.txt");
+        patrons = new Patrons("patrons.txt");
     }
     
     public void setBookFileName(){
@@ -47,6 +47,6 @@ public class Circulation
     }
     
     public List<Book> booksAvailableToPatron(){
-        
+        return null;
     }
 }
