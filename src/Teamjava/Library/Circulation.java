@@ -6,6 +6,7 @@
 
 package Teamjava.Library;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,23 +15,38 @@ import java.util.List;
  */
 public class Circulation 
 {
+    private String bookFileName;
     private Catalog catalog;
     private Patrons patrons;
     
-    public void Circulation(){
+    public Circulation(){
         catalog = new Catalog();
-        patrons = new Patrons("patrons.txt");
+        patrons = new Patrons("allPatrons.txt");
+        populatePatrons();
     }
     
-    public void setBookFileName(){
-        catalog.setFileName();
+    // Open patron file and populate patron list
+    private void populatePatrons(){
+        patrons.openFile();
+        patrons.populatePatrons();
     }
     
-    public int checkOut(Book b, Patron p){
-        return p.checkOut(b);           //return 0 or 1 depending on success
+    // Set book file name and populate book list
+    public void setBookFileName(String file){
+        this.bookFileName = file;
+        catalog.setFileName(bookFileName);
+        catalog.populateCatalog();
     }
     
-    public int checkIn(Book b, Patron p){
+    public int checkOut(String bTitle, String pName){
+        Patron p = patrons.findPatronByName(pName);
+        Book b = findBookByTitle(bTitle);
+        return p.checkOut(b);               //return 0 or 1 depending on success
+    }
+    
+    public int checkIn(String bTitle, String pName){
+        Patron p = patrons.findPatronByName(pName);
+        Book b = findBookByTitle(bTitle);
         return p.checkIn(b);            //return 0 or 1 depending on success
     }
     
@@ -38,15 +54,43 @@ public class Circulation
         return catalog.displayOverDueBooks();
     }
     
-    public List<Book> listBooksByPatron(Patron p){
-        return catalog.displayBooksByHolder(p.getName());
+    public List<Book> listCheckedOutByPatron(String pName){
+        return catalog.displayBooksByHolder(pName);
     }
     
     public List<Book> listAllBooks(){
-        return catalog.books;
+        return catalog.getAllBooks();
     }
     
-    public List<Book> booksAvailableToPatron(){
+    public List<Book> booksAvailableToPatron(String pName){
+        List<Book> allBooks = catalog.getAllBooks();
+        List<Book> available = new ArrayList();
+        Patron p = patrons.findPatronByName(pName);
+        for(Book b: allBooks){
+            if(p.canCheckOut(b))
+                available.add(b);
+        }
+        return available;
+    }
+    
+    public void Exit(){
+        try{
+            catalog.writeToFile(bookFileName);
+        }catch(Exception e){
+            System.out.println("Error writing to file");
+            e.printStackTrace();
+        }
+        System.exit(0);
+    }
+    
+    //Should return a book obj when passed in a book name, should probably go in Catalog
+    private Book findBookByTitle(String t){
+        List<Book> books = catalog.getAllBooks();
+        for(Book book:books){
+            if(book.getBookTitle().equals(t))
+                return book;
+        }
+        System.out.println(t + " was not found in the list of books");
         return null;
     }
 }
