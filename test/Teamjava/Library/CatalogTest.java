@@ -146,5 +146,32 @@ public class CatalogTest
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of allBooksStatus method, of class Catalog.
+     */
+    @Test
+    public void testAllBooksStatus() {
+        System.out.println("allBooksStatus");
+        Catalog instance = new Catalog();
+        String expResult = "";
+        String result = instance.allBooksStatus();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of writeToFile method, of class Catalog.
+     */
+    @Test
+    public void testWriteToFile() throws Exception {
+        System.out.println("writeToFile");
+        String fileToWrite = "";
+        Catalog instance = new Catalog();
+        instance.writeToFile(fileToWrite);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
     
 }
