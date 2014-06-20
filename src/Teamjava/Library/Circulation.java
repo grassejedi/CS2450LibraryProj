@@ -18,17 +18,14 @@ public class Circulation
     private String bookFileName;
     private Catalog catalog;
     private Patrons patrons;
+    private String curStatus;
+    private _Date date;
     
     public Circulation(){
+        date = new _Date();
         catalog = new Catalog();
-        patrons = new Patrons("allPatrons.txt");
+        patrons = new Patrons("src/Teamjava/Library/allPatrons.txt");
         populatePatrons();
-    }
-    
-    // Open patron file and populate patron list
-    private void populatePatrons(){
-        patrons.openFile();
-        patrons.populatePatrons();
     }
     
     // Set book file name and populate book list
@@ -36,18 +33,26 @@ public class Circulation
         this.bookFileName = file;
         catalog.setFileName(bookFileName);
         catalog.populateCatalog();
+        // We should get feedback from these two functions on success
+        setStatus("Catalog populated with books from: " + file);
     }
     
-    public int checkOut(String bTitle, String pName){
+    public void checkOut(String bTitle, String pName){
         Patron p = patrons.findPatronByName(pName);
         Book b = findBookByTitle(bTitle);
-        return p.checkOut(b);               //return 0 or 1 depending on success
+        if(p.checkOut(b) == 1)
+            setStatus("Error checking out");
+        else
+            setStatus(b.getBookTitle() + " checked out by " + p.getName());
     }
     
-    public int checkIn(String bTitle, String pName){
+    public void checkIn(String bTitle, String pName){
         Patron p = patrons.findPatronByName(pName);
         Book b = findBookByTitle(bTitle);
-        return p.checkIn(b);            //return 0 or 1 depending on success
+        if(p.checkIn(b) == 1)
+            setStatus("Error checking in");
+        else
+            setStatus(b.getBookTitle() + " checked in by " + p.getName());
     }
     
     public List<Book> listOverdueBooks(){
@@ -62,6 +67,7 @@ public class Circulation
         return catalog.getAllBooks();
     }
     
+    // list books available to patron
     public List<Book> booksAvailableToPatron(String pName){
         List<Book> allBooks = catalog.getAllBooks();
         List<Book> available = new ArrayList();
@@ -73,6 +79,7 @@ public class Circulation
         return available;
     }
     
+    // write to book file and exit
     public void Exit(){
         try{
             catalog.writeToFile(bookFileName);
@@ -81,6 +88,39 @@ public class Circulation
             e.printStackTrace();
         }
         System.exit(0);
+    }
+    
+    // For GUI
+    public String printStatus(){
+        return this.curStatus;
+    }
+    
+    public String printCurrentDate(){
+        return date.getDateMMDDYY();
+    }
+    
+    public void advanceOneDay(){
+        date.increaseDay();
+        // I think we also need to loop through all books and increment the daysOut on them
+        // A function in Catalog perhap?
+        //catalog.advanceOneDay();
+    }
+    
+    // Open patron file and populate patron list
+    private void populatePatrons(){
+        boolean err = false;
+        
+        if(patrons.openFile() == 1){
+            setStatus("Failed to open patrons file");
+            err = true;
+        }
+        if(patrons.populatePatrons() == 1){
+            setStatus("Failed to read patrons file");
+            err = true;
+        }
+        
+        if(!err)
+            setStatus("Patron list populated");
     }
     
     //Should return a book obj when passed in a book name, should probably go in Catalog
@@ -93,4 +133,10 @@ public class Circulation
         System.out.println(t + " was not found in the list of books");
         return null;
     }
+    
+    // Set a message to be displayed to user
+    private void setStatus(String message){
+        this.curStatus = message;
+    }
+    
 }
