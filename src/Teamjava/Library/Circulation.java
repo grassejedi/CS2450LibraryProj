@@ -19,28 +19,13 @@ public class Circulation
     private Catalog catalog;
     private Patrons patrons;
     private String curStatus;
+    private _Date date;
     
     public Circulation(){
+        date = new _Date();
         catalog = new Catalog();
-        patrons = new Patrons("src/Teamjava/allPatrons.txt");
+        patrons = new Patrons("src/Teamjava/Library/allPatrons.txt");
         populatePatrons();
-    }
-    
-    // Open patron file and populate patron list
-    private void populatePatrons(){
-        boolean err = false;
-        
-        if(patrons.openFile() == 1){
-            setStatus("Failed to open patrons file");
-            err = true;
-        }
-        if(patrons.populatePatrons() == 1){
-            setStatus("Failed to read patrons file");
-            err = true;
-        }
-        
-        if(!err)
-            setStatus("Patron list populated");
     }
     
     // Set book file name and populate book list
@@ -105,6 +90,39 @@ public class Circulation
         System.exit(0);
     }
     
+    // For GUI
+    public String printStatus(){
+        return this.curStatus;
+    }
+    
+    public String printCurrentDate(){
+        return date.getDateMMDDYY();
+    }
+    
+    public void advanceOneDay(){
+        date.increaseDay();
+        // I think we also need to loop through all books and increment the daysOut on them
+        // A function in Catalog perhap?
+        //catalog.advanceOneDay();
+    }
+    
+    // Open patron file and populate patron list
+    private void populatePatrons(){
+        boolean err = false;
+        
+        if(patrons.openFile() == 1){
+            setStatus("Failed to open patrons file");
+            err = true;
+        }
+        if(patrons.populatePatrons() == 1){
+            setStatus("Failed to read patrons file");
+            err = true;
+        }
+        
+        if(!err)
+            setStatus("Patron list populated");
+    }
+    
     //Should return a book obj when passed in a book name, should probably go in Catalog
     private Book findBookByTitle(String t){
         List<Book> books = catalog.getAllBooks();
@@ -120,4 +138,5 @@ public class Circulation
     private void setStatus(String message){
         this.curStatus = message;
     }
+    
 }
