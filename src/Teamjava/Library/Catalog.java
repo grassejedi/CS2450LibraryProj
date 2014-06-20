@@ -168,6 +168,18 @@ public class Catalog {
 		return booksOut;
 	}
 	
+        public Book findBook(String title){
+            Book target=null;
+		for(int i=0; i<books.size(); i++){
+			if (books.get(i).getBookTitle().equals(title)){
+                                target=books.get(i);
+				return target;
+			}
+		}
+                return target;
+	}
+        
+        
 	//It will write all book and the session changes to the file
 	public void writeToFile(String fileToWrite) throws FileNotFoundException, UnsupportedEncodingException{
 		PrintWriter writer = new PrintWriter(fileToWrite, "UTF-8");
