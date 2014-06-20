@@ -1,15 +1,18 @@
 package Teamjava.Library;
 
-/*
+/*******************************************
 Juan Mendoza
 CS2450
-Library Project (java group)
-File reader
-*/
+Library Project (Java group)
+Catalog Class : It represents a library inventory,
+  which includes books, DVDs, and Videotapes  
+*********************************************/
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -24,29 +27,27 @@ public class Catalog {
 	String content;
 	List<Book> books;
 	Book currentBook;
+	
 	//constructors
 	Catalog(){
 		input=new Scanner(System.in);
 		books = new ArrayList<Book>();
-		content="";//delete this not needed
-		
 	}
 	
 	// constructor in case we decide to pass file name as parameter
 	Catalog(String fileName){
 		this.fileName=fileName;
 		input = new Scanner(System.in); //opens a scanner, keyboard
-		content="";
 	}
 	
 	//It will ask for the file name and will set it
 	public void setFileName(){
 		System.out.print("Enter file name: "); 	  //prompt the user
-		String fileName = input.nextLine();		  //store the input from the user
+		fileName = input.nextLine();		  	//store the input from the user
 		if (fileName.equals("0"))				  //way to exit the program in case no file name known
 			System.exit(0);
 		openFile(fileName);
-		this.fileName= fileName;
+		
 	}
 	
 	//To Open file the .txt file  
@@ -77,35 +78,65 @@ public class Catalog {
 		}
 	}
 	
+	//same than readFile, I just though that I may add something here in the future
+	//the name is also more correct
 	public void populateCatalog(){
 		readFile();
+	
 	}
 	
+	//It will create book objects from file parsing
 	public Book createBook(String bookInfo){
-		return null;
+		String[] fields = bookInfo.split("/");
+		if(fields.length==7){
+							   //Title,   author,   type,     media,    status 0=in 1=out,          date of loan started        holder
+			Book book= new Book(fields[0],fields[1],fields[2],fields[3],Integer.parseInt(fields[4]),Integer.parseInt(fields[5]),fields[6]);
+			return book;
+		}
+		//in case file contains missing information exit and report problem
+		else{
+			System.out.println("the file contains inconsistent information");
+			System.exit(1);
+			return null;
+			}
 	}
 	
+	//used to populate Catalog (book a a time) 
 	private String addBook(Book newBook){
 		books.add(newBook);
 		System.out.println("You added "+ newBook.getDescription()+" to the Catalog");
 		return "You added "+ newBook.getDescription()+" to the Catalog";
 	}
+	//remove a book (not in requirements, so not used now, but maybe useful for future requirements)
 	private String removeBook(Book book){
 		books.remove(book);
 		System.out.println("You removed "+ book.getDescription()+" to the Catalog");
 		return "You removed "+ book.getDescription()+"from the Catalog";
 	}
-	public String displayBookStatus(){
-		if (currentBook.isCheckedOut()){
-			System.out.println("Book Out");
-			return"Book Out";
+	
+	//returns a string with the book status (in|out)
+	public String displayBookStatus(Book aBook){
+		if (aBook.isCheckedOut()){
+			//System.out.println("Book Out");
+			return"Out";
 		}
 		else {
-			System.out.println("Book In");
-			return "Book In";
+			//System.out.println("Book In");
+			return "In";
 		}
 	}
+	//String containing all books and their description
+	public String allBooksStatus(){
+		 String BookStatus="";
+		 for(Book b: books ){
+			 System.out.println(b.getDescription()+" "+displayBookStatus(b));
+			 BookStatus+=b.getDescription()+" this Item is checked "+displayBookStatus(b)+"\n";
+		 }
+		 return BookStatus;
+	 }
 	
+	//It will loop in all the catalog books and return a list of those
+	//whose maximum loan time is be exceed 
 	public List<Book> displayOverDueBooks(){
 		List<Book> overDue= new ArrayList<Book>();
 		for(int i=0; i<books.size(); i++){
@@ -114,9 +145,18 @@ public class Catalog {
 				System.out.println("Overdue: "+books.get(i).getDescription());
 			}
 		}
-		return overDue;
+		if (overDue.size()>0){
+			return overDue;
+		}
+		
+		else{
+			System.out.println("no overdue books");
+			return overDue;
+			}
 	}
 	
+	//It will loop in all the catalog books and return a list of those
+	//whose loaner matches the parameter passed  
 	public List<Book> displayBooksByHolder(String holder){
 		List<Book> booksOut= new ArrayList<Book>();
 		for(int i=0; i<books.size(); i++){
@@ -128,4 +168,14 @@ public class Catalog {
 		return booksOut;
 	}
 	
+	//It will write all book and the session changes to the file
+	public void writeToFile(String fileToWrite) throws FileNotFoundException, UnsupportedEncodingException{
+		PrintWriter writer = new PrintWriter(fileToWrite, "UTF-8");
+		
+		for(Book b:books){
+			writer.println(b.title+"/"+b.author+"/"+b.type+"/"+b.media+"/"+b.status+"/"+b.date+"/"+b.holder);
+		}
+		writer.close();
+		
+	}
 }
