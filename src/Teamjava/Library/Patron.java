@@ -130,7 +130,7 @@ public class Patron extends Patrons{
     // Checks book out from library so that it is unavailable to be checked out again until returned.
     public int checkOut(Book book){
         if(!canCheckOut(book)){
-            System.out.println("Cannot check out: " + book.getBookTitle());
+            System.out.println(this.name + " cannot check out: " + book.getBookTitle());
             return 1;
         }
         this.amountCheckedOut++;
@@ -140,6 +140,7 @@ public class Patron extends Patrons{
         return 0;
     }
 
+    
     public int checkIn(Book book){
         //Only check in the book if this patron has it checked out
         if(!book.whoHasIt().equals(this.name)){
@@ -147,7 +148,7 @@ public class Patron extends Patrons{
             return 1;
         }
         
-        //TODO: reset daysOut on book
+        //TODO: reset daysOut on book?
         this.amountCheckedOut--;
         book.setloaner("library");
         book.modifyStatus();
@@ -160,10 +161,10 @@ public class Patron extends Patrons{
         return "Name: " + this.name + ", Type: " + this.type + ", # checked out: " + this.amountCheckedOut; 
     }
     
+    // Patron can check out if:
+    // Adult && within checkout limit && book not checked out
+    // Child && book is children's book && within checkout limit && book not checked out
     public boolean canCheckOut(Book b){
-        if((isAdult() || isChild() && b.isChildrenBook()) && amountCheckedOut < checkOutLimit && !b.isCheckedOut()){
-            return true;
-        }
-        return false;
+        return (isAdult() || isChild() && b.isChildrenBook()) && amountCheckedOut < checkOutLimit && !b.isCheckedOut();
     }
 }

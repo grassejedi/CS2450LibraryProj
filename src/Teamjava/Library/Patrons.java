@@ -122,27 +122,26 @@ public class Patrons {
         input = new Scanner(System.in);
     }
 
-    //It will ask for the file name and will set it
     public void setFileName(String file){
         this.fileName= file;
-        if (fileName.equals("0"))
-                System.exit(0);
         openFile();
     }
 
     //To Open file the .txt file  
-    public void openFile(){
+    public int openFile(){
         try {
                 in = new BufferedReader(new FileReader(fileName));
         } catch (FileNotFoundException e) {
                 //sends a messages if failure opening the file
                 System.out.println("Error opening file: "+fileName);
                 System.out.println("Check file path, and/or spelling ie: fileName.txt");
+                return 1;
         }
+        return 0;
     }
 
     //it will read the file line by line until no more lines found
-    private void readFile(){
+    private int readFile(){
         try {
                 currentLine= in.readLine();
                 while(currentLine!=null){
@@ -153,13 +152,16 @@ public class Patrons {
         } catch (IOException e) {
                 System.out.println("Error reading file");
                 e.printStackTrace();
+                return 1;
         }
+        return 0;
     }
 
-    public void populatePatrons(){
-        readFile();
+    public int populatePatrons(){
+        return readFile();
     }
 
+    // Converts line of file into Patron
     public Patron createPatron(String patronInfo){
         String[] info = patronInfo.split(" ");
         return new Patron(info[0],info[1],Integer.parseInt(info[2]));
@@ -181,13 +183,16 @@ public class Patrons {
         return patrons;
     }
     
-    public Patron findPatronByName(String n){
+    // Finds Patron using patron name
+    // if name is not found, a new patron is created named "PatronNotFound"
+    public Patron findPatronByName(String n){ 
         List<Patron> allPatrons = getAllPatrons();
         for(Patron p: allPatrons){
             if(p.getName().equals(n))
                 return p;
         }
+
         System.out.println(n + " was not found in the list of patrons");
-        return null;
+        return new Patron("PatronNotFound","adult",0);
     }
 }
