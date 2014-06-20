@@ -33,9 +33,12 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="patronInfoPanel" max="32767" attributes="0"/>
-                  <Component id="libraryInfoPanel" min="-2" pref="618" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="saveFileBtn" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="patronInfoPanel" max="32767" attributes="0"/>
+                      <Component id="libraryInfoPanel" min="-2" pref="618" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace pref="18" max="32767" attributes="0"/>
           </Group>
@@ -48,7 +51,9 @@
               <Component id="libraryInfoPanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
               <Component id="patronInfoPanel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="saveFileBtn" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -130,7 +135,7 @@
                       <Component id="jScrollPane5" pref="209" max="32767" attributes="0"/>
                       <Component id="jScrollPane6" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="31" max="32767" attributes="0"/>
+                  <EmptySpace pref="20" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -173,8 +178,10 @@
           <SubComponents>
             <Component class="javax.swing.JTextArea" name="allBooksTxtArea">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="rows" type="int" value="5"/>
+                <Property name="text" type="java.lang.String" value="Moby Dick&#xa;Peter Pan&#xa;The Art of War&#xa;Algorithm Design&#xa;Core Java&#xa;Software Engineering&#xa;Curious George&#xa;Sam Goes Fishing"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -188,8 +195,10 @@
           <SubComponents>
             <Component class="javax.swing.JTextArea" name="overdueBooksTxtArea">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="rows" type="int" value="5"/>
+                <Property name="text" type="java.lang.String" value="Moby Dick&#xa;Core Java"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -203,6 +212,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Advance Date"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="advanceDateBtnActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -288,7 +300,7 @@
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="3">
-                <StringItem index="0" value="john"/>
+                <StringItem index="0" value="Little Johnny"/>
                 <StringItem index="1" value="marry"/>
                 <StringItem index="2" value="yourMom"/>
               </StringArray>
@@ -313,7 +325,10 @@
             <Component class="javax.swing.JList" name="patronAvailBooksList">
               <Properties>
                 <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                  <StringArray count="0"/>
+                  <StringArray count="2">
+                    <StringItem index="0" value="Peter Pan"/>
+                    <StringItem index="1" value="Curious George"/>
+                  </StringArray>
                 </Property>
               </Properties>
             </Component>
@@ -334,7 +349,9 @@
             <Component class="javax.swing.JList" name="checkedOutBooksList">
               <Properties>
                 <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                  <StringArray count="0"/>
+                  <StringArray count="1">
+                    <StringItem index="0" value="Sam Goes Fishing"/>
+                  </StringArray>
                 </Property>
               </Properties>
             </Component>
@@ -357,8 +374,19 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Check In"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checkInBtnActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="saveFileBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Save File"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveFileBtnActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

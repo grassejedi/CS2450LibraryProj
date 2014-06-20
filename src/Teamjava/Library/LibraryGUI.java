@@ -7,6 +7,7 @@
 package Teamjava.Library;
 
 import java.io.File;
+import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -16,7 +17,7 @@ import javax.swing.JOptionPane;
  */
 public class LibraryGUI extends javax.swing.JFrame
 {
-
+    private Catalog libaryCatalog;
     /**
      * Creates new form LibraryGUI
      */
@@ -59,6 +60,7 @@ public class LibraryGUI extends javax.swing.JFrame
         jLabel9 = new javax.swing.JLabel();
         checkOutBtn = new javax.swing.JButton();
         checkInBtn = new javax.swing.JButton();
+        saveFileBtn = new javax.swing.JButton();
 
         libraryFileChooser.setDialogTitle("Open Library File");
 
@@ -84,17 +86,28 @@ public class LibraryGUI extends javax.swing.JFrame
 
         jLabel4.setText("Overdue Books:");
 
+        allBooksTxtArea.setEditable(false);
         allBooksTxtArea.setColumns(20);
         allBooksTxtArea.setRows(5);
+        allBooksTxtArea.setText("Moby Dick\nPeter Pan\nThe Art of War\nAlgorithm Design\nCore Java\nSoftware Engineering\nCurious George\nSam Goes Fishing");
         jScrollPane5.setViewportView(allBooksTxtArea);
 
+        overdueBooksTxtArea.setEditable(false);
         overdueBooksTxtArea.setColumns(20);
         overdueBooksTxtArea.setRows(5);
+        overdueBooksTxtArea.setText("Moby Dick\nCore Java");
         jScrollPane6.setViewportView(overdueBooksTxtArea);
 
         currentDateLabel.setText("1/1/14");
 
         advanceDateBtn.setText("Advance Date");
+        advanceDateBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                advanceDateBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout libraryInfoPanelLayout = new javax.swing.GroupLayout(libraryInfoPanel);
         libraryInfoPanel.setLayout(libraryInfoPanelLayout);
@@ -146,12 +159,12 @@ public class LibraryGUI extends javax.swing.JFrame
                 .addGroup(libraryInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
                     .addComponent(jScrollPane6))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         patronInfoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Patron Info/Checkout", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Lucida Grande", 1, 13))); // NOI18N
 
-        patronNameComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "john", "marry", "yourMom" }));
+        patronNameComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Little Johnny", "marry", "yourMom" }));
         patronNameComboBox.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -162,10 +175,22 @@ public class LibraryGUI extends javax.swing.JFrame
 
         jLabel2.setText("Select Patron:");
 
+        patronAvailBooksList.setModel(new javax.swing.AbstractListModel()
+        {
+            String[] strings = { "Peter Pan", "Curious George" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
         jScrollPane3.setViewportView(patronAvailBooksList);
 
         jLabel3.setText("Available Books:");
 
+        checkedOutBooksList.setModel(new javax.swing.AbstractListModel()
+        {
+            String[] strings = { "Sam Goes Fishing" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
         jScrollPane4.setViewportView(checkedOutBooksList);
 
         jLabel9.setText("Checked Out Books:");
@@ -180,6 +205,13 @@ public class LibraryGUI extends javax.swing.JFrame
         });
 
         checkInBtn.setText("Check In");
+        checkInBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                checkInBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout patronInfoPanelLayout = new javax.swing.GroupLayout(patronInfoPanel);
         patronInfoPanel.setLayout(patronInfoPanelLayout);
@@ -231,15 +263,26 @@ public class LibraryGUI extends javax.swing.JFrame
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
+        saveFileBtn.setText("Save File");
+        saveFileBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                saveFileBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(patronInfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(libraryInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 618, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(saveFileBtn)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(patronInfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(libraryInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 618, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -249,7 +292,9 @@ public class LibraryGUI extends javax.swing.JFrame
                 .addComponent(libraryInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addComponent(patronInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(saveFileBtn)
+                .addGap(16, 16, 16))
         );
 
         pack();
@@ -263,21 +308,49 @@ public class LibraryGUI extends javax.swing.JFrame
 
     private void OpenLibraryFileBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_OpenLibraryFileBtnActionPerformed
     {//GEN-HEADEREND:event_OpenLibraryFileBtnActionPerformed
-//        JOptionPane.showMessageDialog(libraryInfoPanel, "Pressed button",
-//                "Warning", JOptionPane.WARNING_MESSAGE);
-        
+
         int returnVal = libraryFileChooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION)
         {
             File file = libraryFileChooser.getSelectedFile();
-            System.out.println(file.getAbsolutePath());
+            libaryCatalog = new Catalog(file.getAbsolutePath()); 
+            libaryCatalog.populateCatalog();
+            updateAllBooksTxtArea();
+            //allBooksTxtArea.setText(libaryCatalog.allBooksStatus());
+            //overdueBooksTxtArea.setText(libaryCatalog.displayOverDueBooks());
         }
     }//GEN-LAST:event_OpenLibraryFileBtnActionPerformed
 
+    private void updateAllBooksTxtArea()
+    {
+        allBooksTxtArea.setText(libaryCatalog.allBooksStatus());
+    }
+    
+    private void updateOverdueBooksTxtArea(List<String> allBooks)
+    {
+        //overdueBooksTxtArea.setText(t);
+    }
+    
     private void checkOutBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_checkOutBtnActionPerformed
     {//GEN-HEADEREND:event_checkOutBtnActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_checkOutBtnActionPerformed
+
+    private void advanceDateBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_advanceDateBtnActionPerformed
+    {//GEN-HEADEREND:event_advanceDateBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_advanceDateBtnActionPerformed
+
+    private void saveFileBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_saveFileBtnActionPerformed
+    {//GEN-HEADEREND:event_saveFileBtnActionPerformed
+        displayError("This is an error!");
+    }//GEN-LAST:event_saveFileBtnActionPerformed
+
+    private void checkInBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_checkInBtnActionPerformed
+    {//GEN-HEADEREND:event_checkInBtnActionPerformed
+        //String selectedBookToCheckin = checkedOutBooksList.getSelectedIndex();
+        
+    }//GEN-LAST:event_checkInBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -327,6 +400,12 @@ public class LibraryGUI extends javax.swing.JFrame
             }
         });
     }
+    
+    public static synchronized void displayError(String status)
+    {
+        JOptionPane.showMessageDialog(null, status,
+        "Error", JOptionPane.ERROR_MESSAGE);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton OpenLibraryFileBtn;
@@ -353,5 +432,6 @@ public class LibraryGUI extends javax.swing.JFrame
     private javax.swing.JList patronAvailBooksList;
     private javax.swing.JPanel patronInfoPanel;
     private javax.swing.JComboBox patronNameComboBox;
+    private javax.swing.JButton saveFileBtn;
     // End of variables declaration//GEN-END:variables
 }
