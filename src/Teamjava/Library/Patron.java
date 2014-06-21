@@ -136,7 +136,6 @@ public class Patron extends Patrons{
         this.amountCheckedOut++;
         book.setloaner(this.name);
         book.modifyStatus();
-        //What else needs to be done here?
         return 0;
     }
 
@@ -148,10 +147,10 @@ public class Patron extends Patrons{
             return 1;
         }
         
-        //TODO: reset daysOut on book?
         this.amountCheckedOut--;
         book.setloaner("library");
         book.modifyStatus();
+        book.resetDaysOut();
         return 0;
     }
     

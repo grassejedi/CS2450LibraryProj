@@ -191,5 +191,11 @@ public class Catalog {
 		}
 		writer.close();
 		
-	}
+	}        
+        
+        public void incrementDayForAllBooks(){
+            for(Book b: books){
+                b.incrementDay();
+            }
+        }
 }

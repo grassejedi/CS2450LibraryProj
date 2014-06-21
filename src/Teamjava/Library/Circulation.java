@@ -96,14 +96,13 @@ public class Circulation
     }
     
     public String printCurrentDate(){
-        return date.getDateMMDDYY();
+        return date.yearDateToCalendar(date.getDate());
     }
     
     public void advanceOneDay(){
         date.increaseDay();
-        // I think we also need to loop through all books and increment the daysOut on them
-        // A function in Catalog perhap?
-        //catalog.advanceOneDay();
+        catalog.incrementDayForAllBooks();
+        setStatus("Day is now: " + date.yearDateToCalendar(date.getDate()));
     }
     
     // Open patron file and populate patron list

@@ -125,4 +125,12 @@ public class Book {
 	public void setloaner(String holder){
 		this.holder=holder;
 	}
+        
+        public void resetDaysOut(){
+            this.daysOut = 0;
+        }
+        
+        public void incrementDay(){
+            this.ourDate.increaseDay();
+        }
 }
