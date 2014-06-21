@@ -67,6 +67,10 @@ public class Circulation
         return catalog.getAllBooks();
     }
     
+    public List<Patron> listAllPatrons(){
+        return patrons.getAllPatrons();
+    }
+    
     // list books available to patron
     public List<Book> booksAvailableToPatron(String pName){
         List<Book> allBooks = catalog.getAllBooks();
