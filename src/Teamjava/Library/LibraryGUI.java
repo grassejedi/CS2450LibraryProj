@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 public class LibraryGUI extends javax.swing.JFrame
 {
     private Circulation circulationDesk;
+    private boolean buttonEnabled = false;
     /**
      * Creates new form LibraryGUI
      */
@@ -49,6 +50,7 @@ public class LibraryGUI extends javax.swing.JFrame
         overdueBooksTxtArea = new javax.swing.JTextArea();
         currentDateLabel = new javax.swing.JLabel();
         advanceDateBtn = new javax.swing.JButton();
+        saveAndExitFileBtn = new javax.swing.JButton();
         patronInfoPanel = new javax.swing.JPanel();
         patronNameComboBox = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
@@ -60,12 +62,20 @@ public class LibraryGUI extends javax.swing.JFrame
         jLabel9 = new javax.swing.JLabel();
         checkOutBtn = new javax.swing.JButton();
         checkInBtn = new javax.swing.JButton();
-        saveFileBtn = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        statusTxtField = new javax.swing.JTextField();
 
         libraryFileChooser.setDialogTitle("Open Library File");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Team Java Library");
+        addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                formMouseClicked(evt);
+            }
+        });
 
         libraryInfoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Library Info", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Lucida Grande", 1, 13))); // NOI18N
 
@@ -107,6 +117,15 @@ public class LibraryGUI extends javax.swing.JFrame
             }
         });
 
+        saveAndExitFileBtn.setText("Save and Exit");
+        saveAndExitFileBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                saveAndExitFileBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout libraryInfoPanelLayout = new javax.swing.GroupLayout(libraryInfoPanel);
         libraryInfoPanel.setLayout(libraryInfoPanelLayout);
         libraryInfoPanelLayout.setHorizontalGroup(
@@ -115,41 +134,46 @@ public class LibraryGUI extends javax.swing.JFrame
                 .addGap(29, 29, 29)
                 .addGroup(libraryInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(libraryInfoPanelLayout.createSequentialGroup()
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(libraryInfoPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(libraryInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(libraryInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(libraryInfoPanelLayout.createSequentialGroup()
-                                .addComponent(OpenLibraryFileBtn)
-                                .addGap(53, 53, 53)
-                                .addComponent(jLabel8)
+                                .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(libraryInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(libraryInfoPanelLayout.createSequentialGroup()
-                                        .addComponent(currentDateLabel)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(advanceDateBtn)))
-                                .addGap(144, 144, 144))
-                            .addGroup(libraryInfoPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel4)
-                                .addGap(216, 216, 216))))))
+                                .addGap(226, 226, 226)
+                                .addComponent(jLabel4))
+                            .addGroup(libraryInfoPanelLayout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addGroup(libraryInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(OpenLibraryFileBtn)
+                                    .addComponent(saveAndExitFileBtn))
+                                .addGap(161, 161, 161)
+                                .addGroup(libraryInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(advanceDateBtn)
+                                    .addGroup(libraryInfoPanelLayout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(currentDateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                        .addContainerGap())
+                    .addGroup(libraryInfoPanelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30))))
         );
         libraryInfoPanelLayout.setVerticalGroup(
             libraryInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(libraryInfoPanelLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(libraryInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
                     .addComponent(jLabel6)
                     .addComponent(OpenLibraryFileBtn)
-                    .addComponent(currentDateLabel)
-                    .addComponent(advanceDateBtn))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabel8)
+                    .addComponent(currentDateLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(libraryInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(advanceDateBtn)
+                    .addComponent(saveAndExitFileBtn))
+                .addGap(23, 23, 23)
                 .addGroup(libraryInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel4))
@@ -204,21 +228,24 @@ public class LibraryGUI extends javax.swing.JFrame
         patronInfoPanelLayout.setHorizontalGroup(
             patronInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(patronInfoPanelLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(patronInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(checkOutBtn)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(patronInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(patronInfoPanelLayout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(patronNameComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(patronInfoPanelLayout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addGroup(patronInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(checkOutBtn))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(patronInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(checkInBtn))))
+                        .addComponent(checkInBtn)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, patronInfoPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24))))
+            .addGroup(patronInfoPanelLayout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(patronNameComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, patronInfoPanelLayout.createSequentialGroup()
                 .addGap(101, 101, 101)
@@ -249,14 +276,7 @@ public class LibraryGUI extends javax.swing.JFrame
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
-        saveFileBtn.setText("Save File");
-        saveFileBtn.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                saveFileBtnActionPerformed(evt);
-            }
-        });
+        jLabel5.setText("Status:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -264,23 +284,27 @@ public class LibraryGUI extends javax.swing.JFrame
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(saveFileBtn)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(patronInfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(libraryInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 618, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(libraryInfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(statusTxtField))
+                    .addComponent(patronInfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
+                .addContainerGap(15, Short.MAX_VALUE)
                 .addComponent(libraryInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addComponent(patronInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(saveFileBtn)
-                .addGap(16, 16, 16))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(statusTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17))
         );
 
         pack();
@@ -299,9 +323,18 @@ public class LibraryGUI extends javax.swing.JFrame
         if (returnVal == JFileChooser.APPROVE_OPTION)
         {
             File file = libraryFileChooser.getSelectedFile();
+            
             circulationDesk = new Circulation();
+            setStatus();
+            currentDateLabel.setText(circulationDesk.printCurrentDate());
+            setStatus();
             circulationDesk.setBookFileName(file.getAbsolutePath());
+            setStatus();
             updateAllBooksTxtArea(circulationDesk.listAllBooks());
+            setStatus();
+            updateOverdueBooksTxtArea(circulationDesk.listOverdueBooks());
+            setStatus();
+            buttonEnabled = true;
             
             //libaryCatalog = new Catalog(file.getAbsolutePath()); 
             //libaryCatalog.populateCatalog();
@@ -311,40 +344,80 @@ public class LibraryGUI extends javax.swing.JFrame
         }
     }//GEN-LAST:event_OpenLibraryFileBtnActionPerformed
 
-    private void updateAllBooksTxtArea(List<Book> books)
+    private void setStatus()
     {
-        for (Book book : books)
-        {
-            allBooksTxtArea.append(book.getBookTitle() + "\n");
-        }
-        
+        statusTxtField.setText(circulationDesk.printStatus());
     }
     
-    private void updateOverdueBooksTxtArea(List<String> allBooks)
+    private void updateAllBooksTxtArea(List<Book> books)
     {
-        //overdueBooksTxtArea.setText(t);
+        StringBuilder text = new StringBuilder();
+        for (Book book : books)
+        {
+            text.append(book.getBookTitle());
+            text.append("\n");
+        }
+        allBooksTxtArea.setText(text.toString());
     }
+    
+    private void updateOverdueBooksTxtArea(List<Book> books)
+    {
+        StringBuilder text = new StringBuilder();
+        for (Book book : books)
+        {
+            text.append(book.getBookTitle());
+            text.append("\n");
+        }
+        overdueBooksTxtArea.setText(text.toString());
+    }
+    
     
     private void checkOutBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_checkOutBtnActionPerformed
     {//GEN-HEADEREND:event_checkOutBtnActionPerformed
-
+        if(buttonEnabled)
+        {
+            
+        }
     }//GEN-LAST:event_checkOutBtnActionPerformed
 
     private void advanceDateBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_advanceDateBtnActionPerformed
     {//GEN-HEADEREND:event_advanceDateBtnActionPerformed
-        // TODO add your handling code here:
+        if(buttonEnabled)
+        {
+            circulationDesk.advanceOneDay();
+            currentDateLabel.setText(circulationDesk.printCurrentDate());
+            updateAllBooksTxtArea(circulationDesk.listAllBooks());
+            updateOverdueBooksTxtArea(circulationDesk.listOverdueBooks());
+            setStatus();
+        }
+        
     }//GEN-LAST:event_advanceDateBtnActionPerformed
 
-    private void saveFileBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_saveFileBtnActionPerformed
-    {//GEN-HEADEREND:event_saveFileBtnActionPerformed
-        displayError("This is an error!");
-    }//GEN-LAST:event_saveFileBtnActionPerformed
+    private void saveAndExitFileBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_saveAndExitFileBtnActionPerformed
+    {//GEN-HEADEREND:event_saveAndExitFileBtnActionPerformed
+        if(buttonEnabled)
+        {
+            circulationDesk.Exit();
+            this.dispose();
+        }
+    }//GEN-LAST:event_saveAndExitFileBtnActionPerformed
 
     private void checkInBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_checkInBtnActionPerformed
     {//GEN-HEADEREND:event_checkInBtnActionPerformed
         //String selectedBookToCheckin = checkedOutBooksList.getSelectedIndex();
-        
+        if(buttonEnabled)
+        {
+            
+        }
     }//GEN-LAST:event_checkInBtnActionPerformed
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_formMouseClicked
+    {//GEN-HEADEREND:event_formMouseClicked
+        if(buttonEnabled)
+        {
+            circulationDesk.Exit();
+        }
+    }//GEN-LAST:event_formMouseClicked
 
     /**
      * @param args the command line arguments
@@ -413,6 +486,7 @@ public class LibraryGUI extends javax.swing.JFrame
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -426,6 +500,7 @@ public class LibraryGUI extends javax.swing.JFrame
     private javax.swing.JList patronAvailBooksList;
     private javax.swing.JPanel patronInfoPanel;
     private javax.swing.JComboBox patronNameComboBox;
-    private javax.swing.JButton saveFileBtn;
+    private javax.swing.JButton saveAndExitFileBtn;
+    private static javax.swing.JTextField statusTxtField;
     // End of variables declaration//GEN-END:variables
 }
