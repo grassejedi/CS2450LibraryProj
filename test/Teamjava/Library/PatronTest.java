@@ -123,5 +123,92 @@ public class PatronTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of getName method, of class Patron.
+     */
+    @Test
+    public void testGetName() {
+        System.out.println("getName");
+        Patron instance = null;
+        String expResult = "";
+        String result = instance.getName();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of isChild method, of class Patron.
+     */
+    @Test
+    public void testIsChild() {
+        System.out.println("isChild");
+        Patron instance = null;
+        boolean expResult = false;
+        boolean result = instance.isChild();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of checkOut method, of class Patron.
+     */
+    @Test
+    public void testCheckOut() {
+        System.out.println("checkOut");
+        Book book = null;
+        Patron instance = null;
+        int expResult = 0;
+        int result = instance.checkOut(book);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of checkIn method, of class Patron.
+     */
+    @Test
+    public void testCheckIn() {
+        System.out.println("checkIn");
+        Book book = null;
+        Patron instance = null;
+        int expResult = 0;
+        int result = instance.checkIn(book);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of toString method, of class Patron.
+     */
+    @Test
+    public void testToString() {
+        System.out.println("toString");
+        Patron instance = null;
+        String expResult = "";
+        String result = instance.toString();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of canCheckOut method, of class Patron.
+     */
+    @Test
+    public void testCanCheckOut() {
+        System.out.println("canCheckOut");
+        Book b = null;
+        Patron instance = null;
+        boolean expResult = false;
+        boolean result = instance.canCheckOut(b);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
     
 }

@@ -220,5 +220,29 @@ public class BookTest
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of resetDaysOut method, of class Book.
+     */
+    @Test
+    public void testResetDaysOut() {
+        System.out.println("resetDaysOut");
+        Book instance = null;
+        instance.resetDaysOut();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of incrementDay method, of class Book.
+     */
+    @Test
+    public void testIncrementDay() {
+        System.out.println("incrementDay");
+        Book instance = null;
+        instance.incrementDay();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
     
 }

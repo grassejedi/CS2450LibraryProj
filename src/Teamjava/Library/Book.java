@@ -133,4 +133,10 @@ public class Book {
         public void incrementDay(){
             this.ourDate.increaseDay();
         }
+        
+        public void startLoan(int date, String patron){
+            this.date = date;
+            setloaner(patron);
+            modifyStatus();
+        }
 }

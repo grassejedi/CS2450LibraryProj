@@ -40,8 +40,8 @@ public class Circulation
     public void checkOut(String bTitle, String pName){
         Patron p = patrons.findPatronByName(pName);
         Book b = findBookByTitle(bTitle);
-        if(p.checkOut(b) == 1)
-            setStatus("Error checking out");
+        if(p.checkOut(b, date.getDate()) == 1)
+            setStatus(pName + " cannot check out: " + bTitle);
         else
             setStatus(b.getBookTitle() + " checked out by " + p.getName());
     }
