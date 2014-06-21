@@ -173,5 +173,46 @@ public class CatalogTest
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of findBook method, of class Catalog.
+     */
+    @Test
+    public void testFindBook() {
+        System.out.println("findBook");
+        String title = "";
+        Catalog instance = new Catalog();
+        Book expResult = null;
+        Book result = instance.findBook(title);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getAllBooks method, of class Catalog.
+     */
+    @Test
+    public void testGetAllBooks() {
+        System.out.println("getAllBooks");
+        Catalog instance = new Catalog();
+        List expResult = null;
+        List result = instance.getAllBooks();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of incrementDayForAllBooks method, of class Catalog.
+     */
+    @Test
+    public void testIncrementDayForAllBooks() {
+        System.out.println("incrementDayForAllBooks");
+        Catalog instance = new Catalog();
+        instance.incrementDayForAllBooks();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
     
 }

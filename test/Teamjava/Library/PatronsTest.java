@@ -6,6 +6,7 @@
 
 package Teamjava.Library;
 
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -120,6 +121,91 @@ public class PatronsTest {
         Patrons instance = null;
         int expResult = 0;
         int result = instance.updateNumber(name, number);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setFileName method, of class Patrons.
+     */
+    @Test
+    public void testSetFileName() {
+        System.out.println("setFileName");
+        String file = "";
+        Patrons instance = new Patrons();
+        instance.setFileName(file);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of openFile method, of class Patrons.
+     */
+    @Test
+    public void testOpenFile() {
+        System.out.println("openFile");
+        Patrons instance = new Patrons();
+        int expResult = 0;
+        int result = instance.openFile();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of populatePatrons method, of class Patrons.
+     */
+    @Test
+    public void testPopulatePatrons() {
+        System.out.println("populatePatrons");
+        Patrons instance = new Patrons();
+        int expResult = 0;
+        int result = instance.populatePatrons();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of createPatron method, of class Patrons.
+     */
+    @Test
+    public void testCreatePatron() {
+        System.out.println("createPatron");
+        String patronInfo = "";
+        Patrons instance = new Patrons();
+        Patron expResult = null;
+        Patron result = instance.createPatron(patronInfo);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getAllPatrons method, of class Patrons.
+     */
+    @Test
+    public void testGetAllPatrons() {
+        System.out.println("getAllPatrons");
+        Patrons instance = new Patrons();
+        List expResult = null;
+        List result = instance.getAllPatrons();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of findPatronByName method, of class Patrons.
+     */
+    @Test
+    public void testFindPatronByName() {
+        System.out.println("findPatronByName");
+        String n = "";
+        Patrons instance = new Patrons();
+        Patron expResult = null;
+        Patron result = instance.findPatronByName(n);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
