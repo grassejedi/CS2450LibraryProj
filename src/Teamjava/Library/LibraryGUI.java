@@ -89,13 +89,11 @@ public class LibraryGUI extends javax.swing.JFrame
         allBooksTxtArea.setEditable(false);
         allBooksTxtArea.setColumns(20);
         allBooksTxtArea.setRows(5);
-        allBooksTxtArea.setText("Moby Dick\nPeter Pan\nThe Art of War\nAlgorithm Design\nCore Java\nSoftware Engineering\nCurious George\nSam Goes Fishing");
         jScrollPane5.setViewportView(allBooksTxtArea);
 
         overdueBooksTxtArea.setEditable(false);
         overdueBooksTxtArea.setColumns(20);
         overdueBooksTxtArea.setRows(5);
-        overdueBooksTxtArea.setText("Moby Dick\nCore Java");
         jScrollPane6.setViewportView(overdueBooksTxtArea);
 
         currentDateLabel.setText("1/1/14");
@@ -175,22 +173,10 @@ public class LibraryGUI extends javax.swing.JFrame
 
         jLabel2.setText("Select Patron:");
 
-        patronAvailBooksList.setModel(new javax.swing.AbstractListModel()
-        {
-            String[] strings = { "Peter Pan", "Curious George" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane3.setViewportView(patronAvailBooksList);
 
         jLabel3.setText("Available Books:");
 
-        checkedOutBooksList.setModel(new javax.swing.AbstractListModel()
-        {
-            String[] strings = { "Sam Goes Fishing" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane4.setViewportView(checkedOutBooksList);
 
         jLabel9.setText("Checked Out Books:");
@@ -313,7 +299,9 @@ public class LibraryGUI extends javax.swing.JFrame
         if (returnVal == JFileChooser.APPROVE_OPTION)
         {
             File file = libraryFileChooser.getSelectedFile();
- 
+            circulationDesk = new Circulation();
+            circulationDesk.setBookFileName(file.getAbsolutePath());
+            updateAllBooksTxtArea(circulationDesk.listAllBooks());
             
             //libaryCatalog = new Catalog(file.getAbsolutePath()); 
             //libaryCatalog.populateCatalog();
@@ -323,9 +311,13 @@ public class LibraryGUI extends javax.swing.JFrame
         }
     }//GEN-LAST:event_OpenLibraryFileBtnActionPerformed
 
-    private void updateAllBooksTxtArea()
+    private void updateAllBooksTxtArea(List<Book> books)
     {
-        allBooksTxtArea.setText(libaryCatalog.allBooksStatus());
+        for (Book book : books)
+        {
+            allBooksTxtArea.append(book.getBookTitle() + "\n");
+        }
+        
     }
     
     private void updateOverdueBooksTxtArea(List<String> allBooks)
