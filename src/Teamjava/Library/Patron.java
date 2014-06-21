@@ -128,14 +128,13 @@ public class Patron extends Patrons{
     }
     
     // Checks book out from library so that it is unavailable to be checked out again until returned.
-    public int checkOut(Book book){
+    public int checkOut(Book book, int date){
         if(!canCheckOut(book)){
             System.out.println(this.name + " cannot check out: " + book.getBookTitle());
             return 1;
         }
         this.amountCheckedOut++;
-        book.setloaner(this.name);
-        book.modifyStatus();
+        book.startLoan(date, this.name);
         return 0;
     }
 
