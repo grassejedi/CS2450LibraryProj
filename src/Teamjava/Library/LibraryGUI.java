@@ -8,8 +8,10 @@ package Teamjava.Library;
 
 import java.io.File;
 import java.util.List;
+import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.ListModel;
 
 /**
  *
@@ -18,12 +20,18 @@ import javax.swing.JOptionPane;
 public class LibraryGUI extends javax.swing.JFrame
 {
     private Circulation circulationDesk;
-    private boolean buttonEnabled = false;
+    private boolean openFileButtonEnabled = false;
+    private boolean patronCheckOutandInBtnEnabled = false;
+    private DefaultListModel availBooksListModel;
+    private DefaultListModel checkedOutBooksListModel;
+    
     /**
      * Creates new form LibraryGUI
      */
     public LibraryGUI()
     {
+        availBooksListModel = new DefaultListModel();
+        checkedOutBooksListModel = new DefaultListModel();
         initComponents();
     }
 
@@ -186,7 +194,6 @@ public class LibraryGUI extends javax.swing.JFrame
 
         patronInfoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Patron Info/Checkout", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Lucida Grande", 1, 13))); // NOI18N
 
-        patronNameComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Little Johnny", "marry", "yourMom" }));
         patronNameComboBox.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -197,10 +204,14 @@ public class LibraryGUI extends javax.swing.JFrame
 
         jLabel2.setText("Select Patron:");
 
+        patronAvailBooksList.setModel(availBooksListModel);
+        patronAvailBooksList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane3.setViewportView(patronAvailBooksList);
 
         jLabel3.setText("Available Books:");
 
+        checkedOutBooksList.setModel(checkedOutBooksListModel);
+        checkedOutBooksList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane4.setViewportView(checkedOutBooksList);
 
         jLabel9.setText("Checked Out Books:");
@@ -312,8 +323,12 @@ public class LibraryGUI extends javax.swing.JFrame
 
     private void patronNameComboBoxActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_patronNameComboBoxActionPerformed
     {//GEN-HEADEREND:event_patronNameComboBoxActionPerformed
-        String itemSelected = patronNameComboBox.getSelectedItem().toString();
-        System.out.println(itemSelected);
+        if(openFileButtonEnabled)
+        {
+            updateAvailPatronBooks();
+            updateCheckedOutPatronBooks();
+            patronCheckOutandInBtnEnabled = true;
+        }
     }//GEN-LAST:event_patronNameComboBoxActionPerformed
 
     private void OpenLibraryFileBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_OpenLibraryFileBtnActionPerformed
@@ -334,7 +349,8 @@ public class LibraryGUI extends javax.swing.JFrame
             setStatus();
             updateOverdueBooksTxtArea(circulationDesk.listOverdueBooks());
             setStatus();
-            buttonEnabled = true;
+            updatePatronComboBox(circulationDesk.listAllPatrons());
+            openFileButtonEnabled = true;
             
             //libaryCatalog = new Catalog(file.getAbsolutePath()); 
             //libaryCatalog.populateCatalog();
@@ -344,6 +360,32 @@ public class LibraryGUI extends javax.swing.JFrame
         }
     }//GEN-LAST:event_OpenLibraryFileBtnActionPerformed
 
+    private void updateAvailPatronBooks()
+    {
+        availBooksListModel.removeAllElements();
+        String selectedPatron = patronNameComboBox.getSelectedItem().toString();
+        List<Book> booksAvailableList = circulationDesk.
+                booksAvailableToPatron(selectedPatron);
+
+        for(Book books : booksAvailableList)
+        {
+            availBooksListModel.addElement(books.getBookTitle());
+        }
+    }
+    
+    private void updateCheckedOutPatronBooks()
+    {
+        checkedOutBooksListModel.removeAllElements();
+        String selectedPatron = patronNameComboBox.getSelectedItem().toString();
+        List<Book> booksCheckedOutList = circulationDesk.
+                listCheckedOutByPatron(selectedPatron);
+
+        for(Book books : booksCheckedOutList)
+        {
+            checkedOutBooksListModel.addElement(books.getBookTitle());
+        }
+    }
+    
     private void setStatus()
     {
         statusTxtField.setText(circulationDesk.printStatus());
@@ -371,18 +413,49 @@ public class LibraryGUI extends javax.swing.JFrame
         overdueBooksTxtArea.setText(text.toString());
     }
     
+    private void updatePatronComboBox(List<Patron> patrons)
+    {
+        for(Patron patron : patrons)
+        {
+            patronNameComboBox.addItem(patron.getName());
+        }
+    }
     
     private void checkOutBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_checkOutBtnActionPerformed
     {//GEN-HEADEREND:event_checkOutBtnActionPerformed
-        if(buttonEnabled)
+        if(patronCheckOutandInBtnEnabled)
         {
-            
+            if(availBooksListModel.isEmpty())
+            {
+                displayError("Maximum allowed number of checked out books has"
+                        + " been reached!  Please check in some books.");
+            }
+            else
+            {
+    //            System.out.println(patronAvailBooksList.getSelectedValue().toString());
+    //            System.out.println(patronNameComboBox.getSelectedItem().toString());
+                circulationDesk.checkOut(patronAvailBooksList.getSelectedValue().toString(), 
+                        patronNameComboBox.getSelectedItem().toString());
+                updateCheckedOutPatronBooks();
+                updateAvailPatronBooks();
+                if(availBooksListModel.isEmpty())
+                {
+                    displayError("Maximum allowed number of checked out books has"
+                        + " been reached!  Please check in some books.");
+                    statusTxtField.setText("Maximum allowed number of checked out books has"
+                        + " been reached!  Please check in some books.");
+                }
+                else
+                {
+                    setStatus();
+                }
+            }
         }
     }//GEN-LAST:event_checkOutBtnActionPerformed
 
     private void advanceDateBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_advanceDateBtnActionPerformed
     {//GEN-HEADEREND:event_advanceDateBtnActionPerformed
-        if(buttonEnabled)
+        if(openFileButtonEnabled)
         {
             circulationDesk.advanceOneDay();
             currentDateLabel.setText(circulationDesk.printCurrentDate());
@@ -395,7 +468,7 @@ public class LibraryGUI extends javax.swing.JFrame
 
     private void saveAndExitFileBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_saveAndExitFileBtnActionPerformed
     {//GEN-HEADEREND:event_saveAndExitFileBtnActionPerformed
-        if(buttonEnabled)
+        if(openFileButtonEnabled)
         {
             circulationDesk.Exit();
             this.dispose();
@@ -405,15 +478,29 @@ public class LibraryGUI extends javax.swing.JFrame
     private void checkInBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_checkInBtnActionPerformed
     {//GEN-HEADEREND:event_checkInBtnActionPerformed
         //String selectedBookToCheckin = checkedOutBooksList.getSelectedIndex();
-        if(buttonEnabled)
+        if(patronCheckOutandInBtnEnabled)
         {
-            
+            if(checkedOutBooksList.getSelectedValue() != null)
+            {
+                if(checkedOutBooksListModel.isEmpty())
+                {
+                    displayError("No books to check in.");
+                }
+                else
+                {
+                    circulationDesk.checkIn(checkedOutBooksList.getSelectedValue().toString(), 
+                            patronNameComboBox.getSelectedItem().toString());
+                    updateCheckedOutPatronBooks();
+                    updateAvailPatronBooks();
+                    setStatus();
+                }
+            }
         }
     }//GEN-LAST:event_checkInBtnActionPerformed
 
     private void formMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_formMouseClicked
     {//GEN-HEADEREND:event_formMouseClicked
-        if(buttonEnabled)
+        if(openFileButtonEnabled)
         {
             circulationDesk.Exit();
         }
@@ -503,4 +590,6 @@ public class LibraryGUI extends javax.swing.JFrame
     private javax.swing.JButton saveAndExitFileBtn;
     private static javax.swing.JTextField statusTxtField;
     // End of variables declaration//GEN-END:variables
+
+    
 }

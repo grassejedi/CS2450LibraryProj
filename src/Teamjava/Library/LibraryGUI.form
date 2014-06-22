@@ -321,15 +321,6 @@
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JComboBox" name="patronNameComboBox">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="3">
-                <StringItem index="0" value="Little Johnny"/>
-                <StringItem index="1" value="marry"/>
-                <StringItem index="2" value="yourMom"/>
-              </StringArray>
-            </Property>
-          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="patronNameComboBoxActionPerformed"/>
           </Events>
@@ -348,9 +339,10 @@
           <SubComponents>
             <Component class="javax.swing.JList" name="patronAvailBooksList">
               <Properties>
-                <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                  <StringArray count="0"/>
+                <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="availBooksListModel" type="code"/>
                 </Property>
+                <Property name="selectionMode" type="int" value="0"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -369,9 +361,10 @@
           <SubComponents>
             <Component class="javax.swing.JList" name="checkedOutBooksList">
               <Properties>
-                <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                  <StringArray count="0"/>
+                <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="checkedOutBooksListModel" type="code"/>
                 </Property>
+                <Property name="selectionMode" type="int" value="0"/>
               </Properties>
             </Component>
           </SubComponents>
