@@ -482,18 +482,11 @@ public class LibraryGUI extends javax.swing.JFrame
         {
             if(checkedOutBooksList.getSelectedValue() != null)
             {
-                if(checkedOutBooksListModel.isEmpty())
-                {
-                    displayError("No books to check in.");
-                }
-                else
-                {
-                    circulationDesk.checkIn(checkedOutBooksList.getSelectedValue().toString(), 
-                            patronNameComboBox.getSelectedItem().toString());
-                    updateCheckedOutPatronBooks();
-                    updateAvailPatronBooks();
-                    setStatus();
-                }
+                circulationDesk.checkIn(checkedOutBooksList.getSelectedValue().toString(), 
+                        patronNameComboBox.getSelectedItem().toString());
+                updateCheckedOutPatronBooks();
+                updateAvailPatronBooks();
+                setStatus();
             }
         }
     }//GEN-LAST:event_checkInBtnActionPerformed
