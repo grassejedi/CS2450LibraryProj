@@ -128,6 +128,9 @@ public class Book {
         
         public void resetDaysOut(){
             this.daysOut = 0;
+            // This was added because the date that the book was checked out was never reset and was causing the books to show up 
+            // in the overdue list eventhough they weren't checked out.
+            this.date = 0; 
         }
         
         public void incrementDay(){

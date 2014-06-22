@@ -1,10 +1,10 @@
-A Tale of Two Cities/Charles Dickens/Adult/book/0/100/library
-The Lord of the Rings/J. R. R. Tolkien/Children/DVD/0/0/Neil
-And Then There Were None/Agatha Christie/Adult/book/0/100/Neil
+ï»¿A Tale of Two Cities/Charles Dickens/Adult/book/0/0/library
+The Lord of the Rings/J. R. R. Tolkien/Children/DVD/0/0/library
+And Then There Were None/Agatha Christie/Adult/book/0/0/library
 The Hobbit/J. R. R. Tolkien/Children/DVD/0/0/library
 Dream of the Red Chamber/Cao Xueqin/Adult/book/0/0/library
 She/H. Rider Haggard/Adult/ DVD/0/0/library
-The Little Prince/Antoine de Saint-Exupéry/Children/DVD/0/0/library
+The Little Prince/Antoine de Saint-Exupï¿½ry/Children/DVD/0/0/library
 The Da Vinci Code/Dan Brown/Adult/book/0/0/library
 The Catcher in the Rye/J. D. Salinger/Adult/book/0/0/library
 The Alchemist/Paulo Coelho/Children/book/0/0/library
@@ -22,7 +22,7 @@ The Diary of Anne Frank/Anne Frank/Adult/DVD/0/0/library
 To Kill a Mockingbird/Harper Lee/Adult/ book/0/0/library
 Valley of the Dolls/Jacqueline Susann/Children/ book/0/0/library
 Gone with the Wind/Margaret Mitchell/Adult/ book/0/0/library
-One Hundred Years of Solitude/Gabriel García Márquez/Adult/ book/0/0/library
+One Hundred Years of Solitude/Gabriel Garcï¿½a Mï¿½rquez/Adult/ book/0/0/library
 The Thorn Birds/Colleen McCullough/Children/book/0/0/library
 Nineteen Eighty-Four/George Orwell/Adult/DVD/0/0/library
 The Celestine Prophecy/James Redfield/Adult/ book/0/0/library
@@ -34,9 +34,9 @@ The Women's Room/Marilyn French/Adult/book/0/0/library
 Fear of Flying/Erica Jong/Children/book/0/0/library
 Shogun/James Clavell/Adult/DVD/0/0/library
 The Pillars of the Earth/Ken Follett/Adult/ book/0/0/library
-Perfume/Patrick Süskind/Children/book/0/0/library
+Perfume/Patrick Sï¿½skind/Children/book/0/0/library
 The Horse Whisperer/Nicholas Evans/Children/book/0/0/library
-The Shadow of the Wind/Carlos Ruiz Zafón/Adult/tape/0/0/library
+The Shadow of the Wind/Carlos Ruiz Zafï¿½n/Adult/tape/0/0/library
 Tuesdays with Morrie/Mitch Albom/Children/book/0/0/library
 God's Little Acre/Erskine Caldwell/Adult/DVD/0/0/library
 Follow Your Heart/Susanna Tamaro/Adult/book/0/0/library
