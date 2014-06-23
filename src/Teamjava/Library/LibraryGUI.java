@@ -77,13 +77,6 @@ public class LibraryGUI extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Team Java Library");
-        addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
-                formMouseClicked(evt);
-            }
-        });
 
         libraryInfoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Library Info", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Lucida Grande", 1, 13))); // NOI18N
 
@@ -490,14 +483,6 @@ public class LibraryGUI extends javax.swing.JFrame
             }
         }
     }//GEN-LAST:event_checkInBtnActionPerformed
-
-    private void formMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_formMouseClicked
-    {//GEN-HEADEREND:event_formMouseClicked
-        if(openFileButtonEnabled)
-        {
-            circulationDesk.Exit();
-        }
-    }//GEN-LAST:event_formMouseClicked
 
     /**
      * @param args the command line arguments
