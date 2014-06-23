@@ -77,6 +77,13 @@ public class LibraryGUI extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Team Java Library");
+        addWindowListener(new java.awt.event.WindowAdapter()
+        {
+            public void windowClosing(java.awt.event.WindowEvent evt)
+            {
+                formWindowClosing(evt);
+            }
+        });
 
         libraryInfoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Library Info", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Lucida Grande", 1, 13))); // NOI18N
 
@@ -483,6 +490,16 @@ public class LibraryGUI extends javax.swing.JFrame
             }
         }
     }//GEN-LAST:event_checkInBtnActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowClosing
+    {//GEN-HEADEREND:event_formWindowClosing
+// Uncommment if the desired behavior is for the X button to save the file
+//        if(openFileButtonEnabled)
+//        {
+//            circulationDesk.Exit();
+//            this.dispose();
+//        }
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
