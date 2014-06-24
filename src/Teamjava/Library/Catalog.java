@@ -41,23 +41,25 @@ public class Catalog {
 	}
 	
 	//It will ask for the file name and will set it
-	public void setFileName(String file){
+	public int setFileName(String file){
 
 		fileName = file;		  	//store the input from the user
 		if (fileName.equals("0"))				  //way to exit the program in case no file name known
 			System.exit(0);
-		openFile(fileName);
+		return openFile(fileName);
 		
 	}
 	
 	//To Open file the .txt file  
-	public void openFile(String fileName){
+	public int openFile(String fileName){
 		try {
 			in = new BufferedReader(new FileReader(fileName));
+                        return 0;
 		} catch (FileNotFoundException e) {
 			//sends a messages if failure opening the file
 			System.out.println("Error opening file: "+fileName);
 			System.out.println("Check file path, and/or spelling ie: fileName.txt");
+                        return 1;
 			//System.out.println("Try again, or enter 0 as file name to terminate program");
 			//setFileName();
 		}
@@ -96,7 +98,7 @@ public class Catalog {
 		//in case file contains missing information exit and report problem
 		else{
 			System.out.println("the file contains inconsistent information");
-			System.exit(1);
+			//System.exit(1);
 			return null;
 			}
 	}

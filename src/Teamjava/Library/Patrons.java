@@ -195,4 +195,33 @@ public class Patrons {
         System.out.println(n + " was not found in the list of patrons");
         return new Patron("PatronNotFound","adult",0);
     }
+    
+        /*
+     * Updates the number of books when borrowed( increment).. namber is positive
+     * Updates the number of books when returned( decriment..) number is negative
+     * returns the number of borrowed books if number=0
+     */
+     public int updateNumber(String name, int number)throws IOException{
+         long index;
+         String line, number1="";
+         RandomAccessFile fileStream= new RandomAccessFile(fileName,"rw");
+         //String doneReading = "##";
+         do{
+             index= fileStream.getFilePointer();
+             line = fileStream.readLine();
+             Scanner s = new Scanner(line);
+             String tmp=s.next();
+             if( tmp.contains(name)){
+                number1=line.substring(line.length()-1,line.length());
+                line=line.substring(0,line.length()-1);
+                line+=Integer.parseInt(number1)+number;
+                fileStream.seek(index);
+                fileStream.writeBytes(line);
+                break;
+             }
+         }while( !line.equals(null));
+                 
+         fileStream.close();
+         return Integer.parseInt(number1)+number;   
+     }
 }

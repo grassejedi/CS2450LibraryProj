@@ -28,6 +28,14 @@ public class CirculationTest {
         for(Book b: books){
             System.out.println(b.getBookTitle());
         }
+        
+        System.out.println();
+        System.out.println("________________All Patrons___________________");
+        List<Patron> patrons = c.listAllPatrons();
+        for(Patron p:patrons){
+            System.out.println(p.getName());
+        }
+        
         System.out.println();
         System.out.println("Child checking out children's book");
         c.checkOut("Black Beauty", "Bill");
@@ -121,7 +129,7 @@ public class CirculationTest {
         
         System.out.println();
         System.out.println("-----Books checked out by Mike----");
-        books = c.listCheckedOutByPatron("Mike");
+        books = c.listCheckedOutByPatron("Mike");        
         //c.Exit();
     }
     

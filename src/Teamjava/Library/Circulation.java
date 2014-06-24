@@ -29,12 +29,18 @@ public class Circulation
     }
     
     // Set book file name and populate book list
-    public void setBookFileName(String file){
+    public int setBookFileName(String file){
         this.bookFileName = file;
-        catalog.setFileName(bookFileName);
-        catalog.populateCatalog();
+        if(catalog.setFileName(bookFileName) == 1){
+            setStatus(file + " is not a correct file format.");
+            return 1;
+        }else{
+            catalog.populateCatalog();
+            setStatus("Catalog populated with books from: " + file);
+            return 0;
+        }
         // We should get feedback from these two functions on success
-        setStatus("Catalog populated with books from: " + file);
+        
     }
     
     public void checkOut(String bTitle, String pName){

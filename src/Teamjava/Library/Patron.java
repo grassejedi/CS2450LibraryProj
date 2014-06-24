@@ -133,6 +133,12 @@ public class Patron extends Patrons{
             System.out.println(this.name + " cannot check out: " + book.getBookTitle());
             return 1;
         }
+        Patrons patrons = new Patrons("src/Teamjava/Library/allPatrons.txt");
+        try{
+            patrons.updateNumber(this.name, 1);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         this.amountCheckedOut++;
         book.startLoan(date, this.name);
         return 0;
@@ -145,7 +151,12 @@ public class Patron extends Patrons{
             System.out.println("Book: " + book.getBookTitle() + "is not checked out by " + this.name);
             return 1;
         }
-        
+        Patrons patrons = new Patrons("src/Teamjava/Library/allPatrons.txt");
+        try{
+            patrons.updateNumber(this.name, -1);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         this.amountCheckedOut--;
         book.setloaner("library");
         book.modifyStatus();
