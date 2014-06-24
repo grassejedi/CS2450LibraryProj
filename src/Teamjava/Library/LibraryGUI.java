@@ -12,6 +12,26 @@ import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.ListModel;
+import javax.swing.filechooser.FileFilter;
+
+class CustomFilter extends FileFilter
+{
+
+    @Override
+    public boolean accept(File file)
+    {
+        //Allow only directories or files with ".cs2450library" extension
+        return file.isDirectory() || file.getAbsolutePath().endsWith(".cs2450library");
+    }
+
+    @Override
+    public String getDescription()
+    {
+        //This description will be displayed in the dialog
+        return "CS 2450 Libary files (*.cs2450library)";
+    }
+    
+}
 
 /**
  *
@@ -59,6 +79,7 @@ public class LibraryGUI extends javax.swing.JFrame
         currentDateLabel = new javax.swing.JLabel();
         advanceDateBtn = new javax.swing.JButton();
         saveAndExitFileBtn = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
         patronInfoPanel = new javax.swing.JPanel();
         patronNameComboBox = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
@@ -71,9 +92,11 @@ public class LibraryGUI extends javax.swing.JFrame
         checkOutBtn = new javax.swing.JButton();
         checkInBtn = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        statusTxtField = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        statusTxtField = new javax.swing.JTextArea();
 
         libraryFileChooser.setDialogTitle("Open Library File");
+        libraryFileChooser.setFileFilter(new CustomFilter());
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Team Java Library");
@@ -135,6 +158,8 @@ public class LibraryGUI extends javax.swing.JFrame
             }
         });
 
+        jLabel7.setText("(Book Name) - (Status)");
+
         javax.swing.GroupLayout libraryInfoPanelLayout = new javax.swing.GroupLayout(libraryInfoPanel);
         libraryInfoPanel.setLayout(libraryInfoPanelLayout);
         libraryInfoPanelLayout.setHorizontalGroup(
@@ -144,30 +169,34 @@ public class LibraryGUI extends javax.swing.JFrame
                 .addGroup(libraryInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(libraryInfoPanelLayout.createSequentialGroup()
                         .addGroup(libraryInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(libraryInfoPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel1)
-                                .addGap(226, 226, 226)
-                                .addComponent(jLabel4))
+                            .addComponent(jLabel6)
                             .addGroup(libraryInfoPanelLayout.createSequentialGroup()
                                 .addGap(23, 23, 23)
                                 .addGroup(libraryInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(OpenLibraryFileBtn)
-                                    .addComponent(saveAndExitFileBtn))
-                                .addGap(161, 161, 161)
+                                    .addComponent(saveAndExitFileBtn)
+                                    .addComponent(jLabel1))
+                                .addGap(65, 65, 65)
                                 .addGroup(libraryInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(advanceDateBtn)
                                     .addGroup(libraryInfoPanelLayout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
                                         .addComponent(jLabel8)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(currentDateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                        .addContainerGap())
+                                        .addComponent(currentDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(advanceDateBtn))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(libraryInfoPanelLayout.createSequentialGroup()
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(51, 51, 51)
+                        .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30))))
+                        .addComponent(jLabel4)
+                        .addGap(99, 99, 99))))
+            .addGroup(libraryInfoPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane6)
+                .addContainerGap())
         );
         libraryInfoPanelLayout.setVerticalGroup(
             libraryInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,21 +205,23 @@ public class LibraryGUI extends javax.swing.JFrame
                 .addGroup(libraryInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(OpenLibraryFileBtn)
-                    .addComponent(jLabel8)
-                    .addComponent(currentDateLabel))
+                    .addComponent(currentDateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+                    .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(libraryInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(advanceDateBtn)
                     .addComponent(saveAndExitFileBtn))
-                .addGap(23, 23, 23)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addGap(1, 1, 1)
                 .addGroup(libraryInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(libraryInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
                     .addComponent(jScrollPane6))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addGap(30, 30, 30))
         );
 
         patronInfoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Patron Info/Checkout", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Lucida Grande", 1, 13))); // NOI18N
@@ -252,15 +283,22 @@ public class LibraryGUI extends javax.swing.JFrame
                 .addComponent(jLabel9)
                 .addGap(93, 93, 93))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, patronInfoPanelLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
                 .addGroup(patronInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(checkOutBtn)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                    .addGroup(patronInfoPanelLayout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(checkOutBtn))
+                    .addGroup(patronInfoPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(patronInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(checkInBtn)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24))
+                    .addGroup(patronInfoPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(checkInBtn)
+                        .addGap(185, 185, 185))
+                    .addGroup(patronInfoPanelLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane4)
+                        .addContainerGap())))
         );
         patronInfoPanelLayout.setVerticalGroup(
             patronInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -281,10 +319,15 @@ public class LibraryGUI extends javax.swing.JFrame
                 .addGroup(patronInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(checkInBtn)
                     .addComponent(checkOutBtn))
-                .addGap(60, 60, 60))
+                .addGap(59, 59, 59))
         );
 
         jLabel5.setText("Status:");
+
+        statusTxtField.setColumns(20);
+        statusTxtField.setLineWrap(true);
+        statusTxtField.setRows(5);
+        jScrollPane2.setViewportView(statusTxtField);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -297,22 +340,22 @@ public class LibraryGUI extends javax.swing.JFrame
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(statusTxtField))
+                        .addComponent(jScrollPane2))
                     .addComponent(patronInfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(libraryInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(patronInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(patronInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(statusTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -327,30 +370,6 @@ public class LibraryGUI extends javax.swing.JFrame
             patronCheckOutandInBtnEnabled = true;
         }
     }//GEN-LAST:event_patronNameComboBoxActionPerformed
-
-    private void OpenLibraryFileBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_OpenLibraryFileBtnActionPerformed
-    {//GEN-HEADEREND:event_OpenLibraryFileBtnActionPerformed
-
-        int returnVal = libraryFileChooser.showOpenDialog(this);
-        if (returnVal == JFileChooser.APPROVE_OPTION)
-        {
-            File file = libraryFileChooser.getSelectedFile();
-            
-            circulationDesk = new Circulation();
-            setStatus();
-            currentDateLabel.setText(circulationDesk.printCurrentDate());
-            setStatus();
-            circulationDesk.setBookFileName(file.getAbsolutePath());
-            setStatus();
-            updateAllBooksTxtArea(circulationDesk.listAllBooks());
-            setStatus();
-            updateOverdueBooksTxtArea(circulationDesk.listOverdueBooks());
-            setStatus();
-            updatePatronComboBox(circulationDesk.listAllPatrons());
-            openFileButtonEnabled = true;
-            
-        }
-    }//GEN-LAST:event_OpenLibraryFileBtnActionPerformed
 
     private void updateAvailPatronBooks()
     {
@@ -383,19 +402,31 @@ public class LibraryGUI extends javax.swing.JFrame
         statusTxtField.setText(circulationDesk.printStatus());
     }
     
-    private void updateAllBooksTxtArea(List<Book> books)
+    private void updateAllBooksTxtArea()
     {
+        List<Book> books = circulationDesk.listAllBooks();
         StringBuilder text = new StringBuilder();
         for (Book book : books)
         {
-            text.append(book.getBookTitle());
+            String bookEntry = "";
+            bookEntry = book.getBookTitle() + " - ";
+            if(book.isCheckedOut() == true)
+            {
+                bookEntry = bookEntry + "Checked Out";
+            }
+            else
+            {
+                bookEntry = bookEntry + "Checked In";
+            }
+            text.append(bookEntry);
             text.append("\n");
         }
         allBooksTxtArea.setText(text.toString());
     }
     
-    private void updateOverdueBooksTxtArea(List<Book> books)
+    private void updateOverdueBooksTxtArea()
     {
+        List<Book> books = circulationDesk.listOverdueBooks();
         StringBuilder text = new StringBuilder();
         for (Book book : books)
         {
@@ -430,6 +461,8 @@ public class LibraryGUI extends javax.swing.JFrame
                         patronNameComboBox.getSelectedItem().toString());
                 updateCheckedOutPatronBooks();
                 updateAvailPatronBooks();
+                updateAllBooksTxtArea();
+                updateOverdueBooksTxtArea();
                 if(availBooksListModel.isEmpty())
                 {
                     displayError("Maximum allowed number of checked out books has"
@@ -445,28 +478,6 @@ public class LibraryGUI extends javax.swing.JFrame
         }
     }//GEN-LAST:event_checkOutBtnActionPerformed
 
-    private void advanceDateBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_advanceDateBtnActionPerformed
-    {//GEN-HEADEREND:event_advanceDateBtnActionPerformed
-        if(openFileButtonEnabled)
-        {
-            circulationDesk.advanceOneDay();
-            currentDateLabel.setText(circulationDesk.printCurrentDate());
-            updateAllBooksTxtArea(circulationDesk.listAllBooks());
-            updateOverdueBooksTxtArea(circulationDesk.listOverdueBooks());
-            setStatus();
-        }
-        
-    }//GEN-LAST:event_advanceDateBtnActionPerformed
-
-    private void saveAndExitFileBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_saveAndExitFileBtnActionPerformed
-    {//GEN-HEADEREND:event_saveAndExitFileBtnActionPerformed
-        if(openFileButtonEnabled)
-        {
-            circulationDesk.Exit();
-            this.dispose();
-        }
-    }//GEN-LAST:event_saveAndExitFileBtnActionPerformed
-
     private void checkInBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_checkInBtnActionPerformed
     {//GEN-HEADEREND:event_checkInBtnActionPerformed
         //String selectedBookToCheckin = checkedOutBooksList.getSelectedIndex();
@@ -478,6 +489,8 @@ public class LibraryGUI extends javax.swing.JFrame
                         patronNameComboBox.getSelectedItem().toString());
                 updateCheckedOutPatronBooks();
                 updateAvailPatronBooks();
+                updateAllBooksTxtArea();
+                updateOverdueBooksTxtArea();
                 setStatus();
             }
         }
@@ -485,13 +498,63 @@ public class LibraryGUI extends javax.swing.JFrame
 
     private void formWindowClosing(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowClosing
     {//GEN-HEADEREND:event_formWindowClosing
-// Uncommment if the desired behavior is for the X button to save the file
-//        if(openFileButtonEnabled)
-//        {
-//            circulationDesk.Exit();
-//            this.dispose();
-//        }
+
+        if(openFileButtonEnabled)
+        {
+            circulationDesk.Exit();
+            this.dispose();
+        }
     }//GEN-LAST:event_formWindowClosing
+
+    private void saveAndExitFileBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_saveAndExitFileBtnActionPerformed
+    {//GEN-HEADEREND:event_saveAndExitFileBtnActionPerformed
+        if(openFileButtonEnabled)
+        {
+            circulationDesk.Exit();
+            this.dispose();
+        }
+    }//GEN-LAST:event_saveAndExitFileBtnActionPerformed
+
+    private void advanceDateBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_advanceDateBtnActionPerformed
+    {//GEN-HEADEREND:event_advanceDateBtnActionPerformed
+        if(openFileButtonEnabled)
+        {
+            circulationDesk.advanceOneDay();
+            currentDateLabel.setText(circulationDesk.printCurrentDate());
+            updateAllBooksTxtArea();
+            updateOverdueBooksTxtArea();
+            setStatus();
+        }
+    }//GEN-LAST:event_advanceDateBtnActionPerformed
+
+    private void OpenLibraryFileBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_OpenLibraryFileBtnActionPerformed
+    {//GEN-HEADEREND:event_OpenLibraryFileBtnActionPerformed
+
+        int returnVal = libraryFileChooser.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION)
+        {
+            File file = libraryFileChooser.getSelectedFile();
+
+            circulationDesk = new Circulation();
+            setStatus();
+            currentDateLabel.setText(circulationDesk.printCurrentDate());
+            setStatus();
+            if(circulationDesk.setBookFileName(file.getAbsolutePath()) == 1)
+            {
+                displayError("Couldn't open file please try another file.");
+            }
+            else
+            {
+                updateAllBooksTxtArea();
+                setStatus();
+                updateOverdueBooksTxtArea();
+                setStatus();
+                updatePatronComboBox(circulationDesk.listAllPatrons());
+                openFileButtonEnabled = true;
+            }
+
+        }
+    }//GEN-LAST:event_OpenLibraryFileBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -542,9 +605,9 @@ public class LibraryGUI extends javax.swing.JFrame
         });
     }
     
-    public static synchronized void displayError(String status)
+    private void displayError(String status)
     {
-        JOptionPane.showMessageDialog(null, status,
+        JOptionPane.showMessageDialog(libraryInfoPanel, status,
         "Error", JOptionPane.ERROR_MESSAGE);
     }
 
@@ -562,8 +625,10 @@ public class LibraryGUI extends javax.swing.JFrame
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
@@ -575,7 +640,7 @@ public class LibraryGUI extends javax.swing.JFrame
     private javax.swing.JPanel patronInfoPanel;
     private javax.swing.JComboBox patronNameComboBox;
     private javax.swing.JButton saveAndExitFileBtn;
-    private static javax.swing.JTextField statusTxtField;
+    private javax.swing.JTextArea statusTxtField;
     // End of variables declaration//GEN-END:variables
 
     

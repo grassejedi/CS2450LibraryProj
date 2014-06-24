@@ -2,7 +2,7 @@ Mike adult 0
 Johne adult 0
 Mark child 0
 Phil adult 0
-Ali child 0
+Ali child 2
 Sarah adult 0
 Joe adult 0
 Alan child 0
@@ -10,7 +10,7 @@ Alex child 0
 Abbey child 0
 McLoven adult 0
 Josh adult 0
-Neil adult 2
+Neil adult 0
 Abdul adult 0
 Bill child 0
 Alice adult 0
